@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H5唤醒app方法</title>
+    // 此处的smart app banner 以知乎为例
+    <meta name="apple-itunes-app" content="app-id=432274380">
+</head>
+<style>
+    button{
+        outline: none;
+        margin: 0 auto;
+        width: 300px;
+        height: 150px;
+        background: #ffacd5;
+        color: #fff;
+        font-size: 40px;
+        border: none;
+    }
+</style>
+<body>
+    <button>打开app</button>
+</body>
+</html>
+<script>
+    /* tip: 微信中是不可以打开第三方app的，除微信配置白名单  */
+
+    /* IOS 唤醒方式
+     * 1. 在Safari中使用  Smart App Banner
+     * 2. 使用schema协议.
+     */
+
+    /*
+    * 1. Smart App Banner
+    * iOS6的新特性，只针对iOS设备，可以让App开发者可以更容易以超链接的方式自由跳转，
+    * 快速地引导用户到App Store下载自己的App，将访问Web页面的用户转化成App用户。
+    *
+    * 使用方法：
+    * <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    * #content 属性可以传三个参数，以逗号隔开
+    * #app-id(必选) 填写应用在APPStrore的ID
+    * #affiliate-data(可选) 是iTunes 分销联盟计划的ID 一般用不到。
+    * #app-argument（可选）点击『打开』给APP传参数
+    */
+
+    /*
+    *   2. 使用schema协议.  和安卓跳转合并讲解
+    */
+
+    /*
+    *  Android 唤醒方式
+    *  定义协议唤醒
+    */
+
+    // 打开app协议路径:
+    const appUrl = 'newsapp://xxxxx';
+
+    // 直接a链接跳转  (实际开发基本都可以跳转)
+    /*
+    * 直接在html中添加a标签并href写上唤醒地址即可
+    */
+
+    // 通关iframe进行唤醒  (测试发现有很多浏览器其实唤醒不了)
+    let openapp = document.querySelector('button');
+
+    var iframe = document.createElement('iframe');
+    var body = document.body;
+    iframe.style.cssText='display:none;width=0;height=0';
+
+    openapp.addEventListener('click', function() {
+        body.appendChild(iframe);
+        iframe.src = appUrl;
+    }, false)
+
+
+
+</script>
