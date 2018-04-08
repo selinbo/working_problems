@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="">{{obj.a}}</a>
+<button>setter</button>
+</body>
+</html>
+<script>
+    var obj = {
+        a:1,
+        get b() {console.log(this.a)},
+        set c(d) {this.a=d}
+    };
+    console.log(obj)
+    obj.b;
+    obj.c=20;
+    console.log(obj);
+
+
+    // 简单模板匹配{{}}
+    function modeFix() {
+        var body = document.querySelector('body');
+        var Document = body.innerHTML;
+        var reg = /\<.*\>.*({{(.+)}})\<\/.*\>/;
+        var regData = /({{.+}})/;
+        var result = reg.exec(Document);
+        // 匹配当前元素的当前绑定数据
+        var newDom = result[0].replace(regData,eval(result[2]));
+        obj.newDom = newDom;
+        console.log(newDom,obj)
+        var Newdocument = Document.replace(reg,eval(result[2]));
+        body.innerHTML = Newdocument;
+    };
+
+    //  初始化数据
+    modeFix();
+
+    var setter = document.querySelector('button');
+    setter.onclick = function () {
+        obj.c = obj.a + 1;
+        console.log(obj)
+    }
+
+
+
+</script>
